@@ -24,7 +24,8 @@ router.post("/",async(req,res,next)=>{
           user: {
               id: user_exist.id,
               phone:user_exist.phone,
-              pass:user_exist.pass
+              pass:user_exist.pass,
+              role:user_exist.role
           }
       }
       

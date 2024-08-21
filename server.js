@@ -13,7 +13,7 @@ connectDB();
 
 app.use('/user/register',  require('./route/register'));
 app.use('/user/getuser', require('./route/getuser'));
- app.use('/user/login',  require('./route/login')); 
+app.use('/user/login',  require('./route/login')); 
 
 const PORT = 3000;
 

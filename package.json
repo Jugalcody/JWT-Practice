@@ -1,5 +1,5 @@
 {
-  "name": "practice",
+  "name": "jwt",
   "version": "1.0.0",
   "description": "for practice",
   "main": "server.js",

@@ -2,7 +2,9 @@ const express=require("express");
 const router=express.Router();
 const User=require("../Model/User");
 const userjwt = require("../middleware/user_jwt");
-router.get('/', userjwt, async(req, res, next) => {
+const authorise = require("../middleware/authorise");
+router.get('/', userjwt,authorise("admin"), async(req, res, next) => {
+  
     try {
     
         const user = await User.findOne({phone:req.user.phone});

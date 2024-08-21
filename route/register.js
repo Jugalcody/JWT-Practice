@@ -8,7 +8,7 @@ const jwtKey = "secret";
 
 
 router.post("/", async (req, res, next) => {
-    const { phone, pass } = req.body;
+    const { phone, pass,role} = req.body;
 
     try {
         let user_exist = await User.findOne({ phone: phone });
@@ -21,6 +21,7 @@ router.post("/", async (req, res, next) => {
         
         let user = new User();
         user.phone = phone;
+        user.role=role;
         const hash = await bcrypt.hash(pass, 10);
         user.pass = hash;
 
@@ -30,7 +31,8 @@ router.post("/", async (req, res, next) => {
             user: {
                 id: user.id,
                 phone:user.phone,
-                pass:user.pass
+                pass:user.pass,
+                role:user.role
             }
         }
            
@@ -46,7 +48,8 @@ router.post("/", async (req, res, next) => {
                 success: true,
                 msg: "User registered",
                 token: token,
-                id:user.id
+                id:user.id,
+                role:user.role
             });
         });
 
