@@ -1,16 +1,17 @@
-const express=require("express");
+import express from "express";
 const router=express.Router();
-const User=require("../Model/User");
-const userjwt = require("../middleware/user_jwt");
-const authorise = require("../middleware/authorise");
+import User from "../Model/User.js";
+import userjwt from "../middleware/user_jwt.js";
+import authorise from "../middleware/authorise.js";
+
 router.get('/', userjwt,authorise("admin"), async(req, res, next) => {
   
     try {
     
-        const user = await User.findOne({phone:req.user.phone});
+        const user = await User.find({}, '-pass');
             res.status(200).json({
                 success: true,
-                user: req.user.user
+                user: user
             });
     } catch(error) {
         console.log(error.message);
@@ -21,4 +22,4 @@ router.get('/', userjwt,authorise("admin"), async(req, res, next) => {
         next();
     }
 });
-module.exports = router;
+export default router;
